@@ -1,9 +1,10 @@
 plugins {
 	id 'java'
+	id 'idea'
 	id 'net.minecraftforge.gradle.forge'
 }
 
-group 'com.enderzombi102'
+group 'com.enderzombi102.endertweaks'
 version '1.0.0'
 
 minecraft {
@@ -21,9 +22,36 @@ repositories {
 	}
 	maven {
 		name = 'forge'
-		url = 'http://files.minecraftforge.net/maven'
+		url = 'https://maven.minecraftforge.net/'
 	}
 }
 
 dependencies {
+	compile files('./libs/deobfed.jar')
+	compile files('./libs/forge-1.7.10-10.13.4.1614-1.7.10-srgBin.jar')
+	compile files('./libs/binaries.jar')
+}
+
+processResources {
+	// this will ensure that this task is redone when the versions change.
+	inputs.property "version", project.version
+	inputs.property "mcversion", project.minecraft.version
+
+	// replace stuff in mcmod.info, nothing else
+	from(sourceSets.main.resources.srcDirs) {
+		include 'mcmod.info'
+
+		// replace version and mcversion
+		expand 'version':project.version, 'mcversion':project.minecraft.version
+	}
+
+	// copy everything else except the mcmod.info
+	from(sourceSets.main.resources.srcDirs) {
+		exclude 'mcmod.info'
+	}
+}
+
+idea.module {
+	downloadJavadoc = true
+	inheritOutputDirs = true
 }

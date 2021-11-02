@@ -1,0 +1,16 @@
+[
+	{
+		"modid": "endertweaks",
+		"name": "EnderTweaks",
+		"description": "A compatability mod.",
+		"version": "${version}",
+		"mcversion": "${mcversion}",
+		"url": "",
+		"updateUrl": "",
+		"authorList": ["ENDERZOMBI102"],
+		"credits": "Me",
+		"logoFile": "",
+		"screenshots": [],
+		"dependencies": []
+	}
+]
